@@ -1,0 +1,204 @@
+:root {
+  color-scheme: dark;
+  background: #101010;
+  color: #f2f2f2;
+  font-family: system-ui, sans-serif;
+  --muted: #969696;
+  --line: #363636;
+}
+*, *::before, *::after { box-sizing: border-box; }
+body {
+  min-width: 0;
+  min-height: 100svh;
+  margin: 0;
+  display: grid;
+  align-items: center;
+}
+button {
+  appearance: none;
+  padding: 0;
+  border: 0;
+  color: inherit;
+  background: transparent;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+button:focus-visible, .game-mount:focus-visible {
+  outline: 2px solid #f2f2f2;
+  outline-offset: 3px;
+}
+button:disabled { opacity: .4; cursor: default; }
+[hidden] { display: none !important; }
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+.ink-label { display: inline-flex; align-items: center; position: relative; flex: 0 0 auto; }
+.ink-label canvas { display: block; max-width: 100%; }
+.course-shell {
+  width: min(calc(100% - clamp(28px, 7vw, 112px)), 1480px, calc((100svh - 156px) * 16 / 9));
+  margin: 16px auto;
+}
+.course-header, .course-footer, .identity, .course-controls, .key-group,
+.key-action, .pause-button, .keycap, .hold-key, .modal-button, .station-button {
+  display: flex;
+  align-items: center;
+}
+.course-header, .course-footer { justify-content: space-between; }
+.course-header { min-height: 66px; gap: 16px; }
+.identity { gap: 24px; min-width: 0; }
+.wordmark, .mode-title, .debug-title { margin: 0; font-size: 0; }
+.wordmark { transform: rotate(-2deg); transform-origin: left center; }
+.course-name {
+  display: flex;
+  align-items: center;
+  min-height: 22px;
+  border-left: 1px solid #4c4c4c;
+  padding-left: 22px;
+}
+.course-name .ink-label { opacity: .63; }
+.pause-button, .modal-button, .station-button {
+  justify-content: center;
+  gap: 10px;
+  border: 1px solid #494949;
+  border-radius: 4px;
+  background: #191919;
+}
+.pause-button { min-height: 35px; padding: 3px 14px; }
+.pause-icon { width: 10px; height: 12px; border-inline: 3px solid currentColor; }
+.play-icon { width: 0; height: 0; border-block: 6px solid transparent; border-left: 9px solid currentColor; }
+.course-stage {
+  aspect-ratio: 16 / 9;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background: #000;
+  outline: 1px solid #383838;
+  border-radius: 2px;
+}
+.game-mount { position: absolute; inset: 0; overflow: hidden; }
+.game-mount:focus { outline-offset: -3px; }
+.game-mount canvas { display: block; touch-action: none; }
+.course-footer { min-height: 63px; gap: 20px; }
+.course-controls { gap: clamp(12px, 2.2vw, 32px); flex-wrap: wrap; }
+.key-group, .key-action { gap: 6px; }
+.key-group > .ink-label, .key-action > .ink-label { margin-left: 2px; opacity: .73; }
+.hold-key {
+  justify-content: center;
+  min-height: 36px;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.keycap {
+  min-width: 29px;
+  height: 26px;
+  justify-content: center;
+  padding-inline: 4px;
+  border: 1px solid #4c4c4c;
+  border-bottom: 2px solid #545454;
+  border-radius: 4px;
+  background: #202020;
+}
+.key-action { min-height: 36px; }
+.key-action:hover > .ink-label, .key-action[aria-pressed=true] > .ink-label { opacity: 1; }
+.hold-key:hover .keycap, .key-action:hover .keycap, .key-action[aria-pressed=true] .keycap,
+.pause-button:hover:enabled, .station-button:hover, .station-button[aria-current=step],
+.modal-button:hover { border-color: #949494; background: #2b2b2b; }
+.hold-key.is-held .keycap, .key-action:active .keycap { background: #eee; border-color: #eee; }
+.hold-key.is-held canvas, .key-action:active .keycap canvas { filter: invert(1); }
+.course-progress { display: flex; flex-direction: column; align-items: flex-end; gap: 5px; min-width: 76px; }
+.progress-label { display: flex; opacity: .72; }
+.progress-track { display: flex; gap: 4px; width: 100%; }
+.step-marker { height: 2px; background: #444; flex: 1; border-radius: 2px; }
+.step-marker.is-past { background: #898989; }
+.step-marker.is-current { background: #f2f2f2; }
+.debug-panel {
+  position: absolute;
+  z-index: 2;
+  top: 12px;
+  left: 12px;
+  max-width: calc(100% - 24px);
+  background: #151515f2;
+  border: 1px solid #454545;
+  border-radius: 4px;
+  padding: 12px;
+}
+.debug-title { padding-bottom: 9px; }
+.debug-stats { display: flex; gap: 12px; }
+.debug-jump-label { opacity: .65; border-top: 1px solid var(--line); margin: 10px 0 6px; padding-top: 6px; }
+.debug-stations, .mode-actions { display: flex; flex-wrap: wrap; gap: 5px; }
+.station-button { min-height: 28px; min-width: 25px; padding: 2px 5px; }
+.mode-overlay {
+  position: absolute;
+  z-index: 3;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: #000d;
+}
+.mode-card { display: grid; justify-items: center; gap: 26px; padding: 20px; }
+.mode-title { text-align: center; }
+.mode-actions { justify-content: center; gap: 10px; }
+.modal-button { min-height: 39px; padding: 5px 15px; }
+.modal-button.primary { border-color: #f2f2f2; background: #f2f2f2; }
+.modal-button.primary:hover { background: #d9d9d9; }
+.modal-button.primary canvas { filter: invert(1); }
+@media (max-width: 760px) {
+  .course-shell { width: calc(100% - 28px); margin: 12px auto; }
+  .course-header { min-height: 60px; }
+  .identity { gap: 13px; }
+  .course-name { padding-left: 12px; }
+  .course-footer { align-items: flex-start; padding: 12px 0; }
+  .course-controls { gap: 4px 14px; }
+  .course-progress { margin-top: 5px; }
+}
+@media (max-width: 540px) {
+  .course-shell { width: calc(100% - 20px); }
+  .course-name { display: none; }
+  .course-controls { gap: 4px 10px; }
+  .course-footer { flex-wrap: wrap; gap: 6px; }
+  .course-progress { flex-direction: row; gap: 8px; align-items: center; }
+  .progress-track { width: 60px; }
+  .debug-panel { left: 4px; top: 4px; padding: 6px; }
+  .debug-title { padding-bottom: 4px; }
+  .debug-jump-label { margin: 4px 0; padding-top: 4px; }
+}
+@media (pointer: coarse) {
+  .hold-key, .key-action, .pause-button { min-height: 44px; }
+  .hold-key .keycap { min-width: 40px; height: 36px; }
+}
+@media (orientation: landscape) and (max-height: 550px) {
+  .course-shell { width: min(calc(100% - 18px), calc((100svh - 82px) * 16 / 9)); margin: 3px auto; }
+  .course-header { min-height: 37px; }
+  .course-footer { min-height: 37px; padding: 0; align-items: center; }
+  .wordmark { transform: rotate(-2deg) scale(.8); }
+  .course-controls { gap: 5px; }
+  .key-group, .key-action { gap: 2px; }
+  .course-progress { margin: 0; }
+  .pause-button { min-height: 32px; }
+}
+.debug-cheats { display: flex; flex-wrap: wrap; gap: 6px; padding-top: 8px; }
+.debug-run { padding-top: 8px; }
+.debug-panel { max-height: 90%; overflow: auto; }
+.mode-overlay { overflow: auto; }
+.pause-settings { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px 18px; }
+.mode-card { max-height: 100%; gap: clamp(10px, 2.8vh, 26px); }
+@media (prefers-reduced-motion: no-preference) {
+  .mode-overlay:not([hidden]) { animation: speller-fade-in var(--menu-fade) ease-out; }
+  .mode-overlay.demo-finished .mode-card { animation: speller-fade-in var(--result-fade) ease-out; }
+  @keyframes speller-fade-in { from { opacity: 0; } to { opacity: 1; } }
+}
+
+@media (max-width: 540px), (max-height: 480px) {
+  .mode-card { padding: 6px; gap: 6px; }
+  .mode-actions { gap: 4px 8px; }
+  .mode-title canvas { max-height: 30px; object-fit: contain; }
+}

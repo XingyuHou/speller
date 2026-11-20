@@ -1,0 +1,24 @@
+.egg-checklist {
+  position:absolute; z-index:2; top:12%; right:2%; padding:10px 12px; background:#111;
+  border:1px solid #757575; border-radius:3px 7px 4px 6px;
+  max-width:48%; max-height:78%; overflow:auto;
+}
+.egg-checklist header { display:flex; justify-content:space-between; align-items:center; gap:12px; border-bottom:1px solid #555; }
+.egg-checklist h3 { margin:0; display:flex; }
+.egg-checklist-close { width:24px; height:24px; position:relative; }
+.egg-checklist-close::before,.egg-checklist-close::after {
+  content:''; position:absolute; top:50%; left:5px; width:14px; height:1.5px; background:#ddd; transform:rotate(42deg);
+}
+.egg-checklist-close::after { transform:rotate(-47deg); }
+.egg-checklist ul { list-style:none; margin:6px 0 0; padding:0; }
+.egg-checklist li { display:flex; align-items:center; gap:8px; min-height:19px; }
+.egg-checklist .ink-label { min-width:0; flex-shrink:1; }
+.egg-checklist canvas { object-fit:contain; }
+.egg-check { display:inline-block; width:11px; height:11px; flex:none; border:1px solid #7a7a7a; border-radius:2px; }
+.is-found .egg-check { border-color:#7cff8a; position:relative; }
+.is-found .egg-check::after { content:''; position:absolute; left:2px; top:1px; width:7px; height:4px; border-left:1.5px solid #7cff8a; border-bottom:1.5px solid #7cff8a; transform:rotate(-45deg); }
+@media(max-width:650px),(max-height:480px) {
+  .egg-checklist { top:auto; bottom:2%; right:1%; padding:3px 5px; max-width:60%; max-height:calc(100% - 45px); }
+  .egg-checklist li { min-height:14px; gap:4px; }
+  .egg-checklist ul { margin-top:2px; }
+}
