@@ -1,6 +1,8 @@
 # Speller
 
-[直接试玩](https://speller-wordplay-demo.paperychurn.chatgpt.site/) · [跑跳练习](https://speller-wordplay-demo.paperychurn.chatgpt.site/?course=practice) · [拼词练习](https://speller-wordplay-demo.paperychurn.chatgpt.site/?course=spells)
+[下载离线游戏 ZIP](https://github.com/XingyuHou/speller/releases/latest/download/Speller-offline.zip) · [下载源码 ZIP](https://github.com/XingyuHou/speller/archive/refs/heads/main.zip)
+
+**只想玩？** 下载离线游戏 ZIP，解压后双击 `Speller.html`，用电脑浏览器打开即可。不用联网、安装 Node.js 或启动服务器。转发 ZIP 即可分享游戏；收到文件的人不需要 GitHub 账号。
 
 Speller 是一款文字跑酷网页游戏。白色笔画是可以踩的地形；踩到浅蓝色单词后，可以把它的字母重新排列，施法改变前方的路。
 
@@ -19,7 +21,9 @@ npm ci
 npm run dev
 ```
 
-打开终端打印的本地地址。`npm test` 运行 Vitest 测试；`npm run build` 检查 TypeScript 并生成 `dist/`；`npm run preview` 可在本机试玩构建版本。部署时将 `dist/` 的内容放在静态网站根路径。
+打开终端打印的本地地址。`npm test` 运行 Vitest 测试；`npm run build` 检查 TypeScript 并生成 `dist/`；`npm run preview` 可在本机试玩该构建版本。
+
+运行 `npm run build:offline` 可重新生成独立文件 `offline/Speller.html`。这个文件才是适合双击或转发的版本；不要直接双击源码或 `dist/` 里的 `index.html`。
 
 ## 项目入口
 
